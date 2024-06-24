@@ -1,49 +1,24 @@
-def calcular_pendiente_superficie(funcion, punto):
+# Este programa calcula el área de un círculo.
+# El usuario proporciona el radio como entrada.
+
+import math
+
+def calcular_area_circulo(radio):
     """
-    Calcula las pendientes en las direcciones X e Y de una superficie definida por una función
-    en un punto específico.
-
-    Parámetros:
-        funcion (function): Función que define la superficie f(x, y).
-        punto (tuple): Tupla que representa el punto (x, y) en la superficie.
-
-    Retorna:
-        tuple: Tupla que contiene las pendientes en las direcciones X e Y.
+    Calcula el área de un círculo dado su radio.
+    :param radio: Radio del círculo (float)
+    :return: Área del círculo (float)
     """
-
-    x, y = punto
-
-    # Derivadas parciales con respecto a x e y
-    df_dx = partial(funcion, dx=1, dy=0)
-    df_dy = partial(funcion, dx=0, dy=1)
-
-    # Evaluación de las derivadas parciales en el punto
-    pendiente_x = df_dx(x, y)
-    pendiente_y = df_dy(x, y)
-
-    return pendiente_x, pendiente_y
-
+    area = math.pi * radio ** 2
+    return area
 
 def main():
-    """
-    Programa principal que calcula las pendientes en las direcciones X e Y de una superficie
-    parabólica en un punto específico.
-    """
-
-    # Función que define la superficie parabólica f(x, y)
-    def funcion_superficie(x, y):
-        return 4 - x**2 - y**2
-
-    # Punto en la superficie
-    punto = (1, 1)  # P(1, 1, 2)
-
-    # Cálculo de las pendientes
-    pendiente_x, pendiente_y = calcular_pendiente_superficie(funcion_superficie, punto)
-
-    # Impresión de los resultados
-    print(f"Pendiente en dirección X: {pendiente_x}")
-    print(f"Pendiente en dirección Y: {pendiente_y}")
-
+    try:
+        radio = float(input("Ingresa el radio del círculo: "))
+        area_circulo = calcular_area_circulo(radio)
+        print(f"El área del círculo con radio {radio} es {area_circulo:.2f}")
+    except ValueError:
+        print("Error: Ingresa un valor numérico válido para el radio.")
 
 if __name__ == "__main__":
     main()
